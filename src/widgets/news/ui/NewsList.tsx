@@ -11,8 +11,8 @@ interface NewsListProps {
 export const NewsList: React.FC<NewsListProps> = ({ news }) => {
   return (
     <Group className={styles.newsList}>
-      {news.map((item) => (
-        <NewsItem item={item} key={item.id} />
+      {news.map((item, index) => (
+        <NewsItem item={item} key={item.id} number={index + 1} />
       ))}
     </Group>
   );

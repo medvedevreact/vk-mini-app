@@ -35,7 +35,7 @@ export const News: FC<NavIdProps> = ({ id }) => {
       <PanelHeader
         before={<PanelHeaderBack onClick={() => routeNavigator.back()} />}
       >
-        Новость {newsId}
+        Новость #{newsId}
       </PanelHeader>
 
       {currentNews && (

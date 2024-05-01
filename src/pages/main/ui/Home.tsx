@@ -4,6 +4,7 @@ import { fetchNewStories } from "../api/newsSlice";
 import { NewsList } from "../../../widgets/news/ui/NewsList";
 import { Header } from "../../../widgets/header/ui/Header";
 import { useAppDispatch, useAppSelector } from "../../../app/appStore";
+import { RefreshNewsBtn } from "../../../features/refreshNewsBtn/ui/RefreshNewsBtn";
 
 export const Home: FC<NavIdProps> = ({ id }) => {
   const dispatch = useAppDispatch();
@@ -11,7 +12,10 @@ export const Home: FC<NavIdProps> = ({ id }) => {
   const { news, loading } = useAppSelector((state) => state.news);
 
   useEffect(() => {
-    dispatch(fetchNewStories());
+    const fetchNews = () => dispatch(fetchNewStories());
+    fetchNews();
+    const intervalId = setInterval(fetchNews, 60000);
+    return () => clearInterval(intervalId);
   }, [dispatch]);
 
   if (loading) {
@@ -21,6 +25,7 @@ export const Home: FC<NavIdProps> = ({ id }) => {
   return (
     <Panel id={id}>
       <Header />
+      <RefreshNewsBtn />
       <NewsList news={news} />
     </Panel>
   );
