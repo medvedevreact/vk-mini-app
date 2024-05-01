@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import styles from "./Comment.module.scss";
 import { commentItem } from "../../../app/types/types";
 import { ShowAnswersBtn } from "../../../features/showAnswersBtn/ui/ShowAnswersBtn";
+import he from "he";
 
 interface CommentProps {
   commentId: number;
@@ -21,6 +22,11 @@ export const Comment: FC<CommentProps> = ({ commentId }) => {
     axios
       .get(`https://hacker-news.firebaseio.com/v0/item/${commentId}.json`)
       .then((resp) => {
+        if (resp.data && resp.data.text) {
+          resp.data.text = he
+            .decode(resp.data.text)
+            .replace(/<\/?[^>]+(>|$)/g, "");
+        }
         setComment(resp.data);
         setLoading(false);
       })
