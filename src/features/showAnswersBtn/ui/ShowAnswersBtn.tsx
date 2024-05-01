@@ -12,7 +12,7 @@ export const ShowAnswersBtn: FC<ShowAnswersBtnProps> = ({
 }) => {
   return (
     <p className={styles.showAnswersBtn} onClick={toggleReplies}>
-      {isOpenReplies ? "Скрыть ответы" : "Показать Ответы"}
+      {isOpenReplies ? "Hide Replies" : "Show Replies"}
     </p>
   );
 };

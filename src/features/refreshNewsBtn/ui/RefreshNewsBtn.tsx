@@ -12,7 +12,7 @@ export const RefreshNewsBtn = () => {
 
   return (
     <Button onClick={handleRefreshClick} className={styles.button}>
-      Обновить новости
+      Update news
     </Button>
   );
 };

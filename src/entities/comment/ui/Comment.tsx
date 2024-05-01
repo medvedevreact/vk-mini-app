@@ -15,26 +15,29 @@ export const Comment: FC<CommentProps> = ({ commentId }) => {
   const [loading, setLoading] = useState(false);
   const [isOpenReplies, setIsOpenReplies] = useState(false);
 
-  console.log(comment);
-
   useEffect(() => {
     setLoading(true);
     axios
       .get(`https://hacker-news.firebaseio.com/v0/item/${commentId}.json`)
       .then((resp) => {
-        if (resp.data && resp.data.text) {
-          resp.data.text = he
-            .decode(resp.data.text)
-            .replace(/<\/?[^>]+(>|$)/g, "");
+        if (
+          resp.data &&
+          !Object.prototype.hasOwnProperty.call(resp.data, "deleted")
+        ) {
+          if (resp.data.text) {
+            resp.data.text = he
+              .decode(resp.data.text)
+              .replace(/<\/?[^>]+(>|$)/g, "");
+          }
+          setComment(resp.data);
         }
-        setComment(resp.data);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [commentId]);
 
   if (loading) return <Div>Loading...</Div>;
-  if (!comment) return <Div>Comment not found.</Div>;
+  if (!comment) return <Div>Comment was deleted.</Div>;
 
   return (
     <Div style={{ marginLeft: "20px", cursor: "pointer" }}>
