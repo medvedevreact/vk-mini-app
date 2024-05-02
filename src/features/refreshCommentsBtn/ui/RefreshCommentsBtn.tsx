@@ -3,14 +3,14 @@ import { Button } from "@vkontakte/vkui";
 import styles from "./RefreshComments.module.scss";
 
 interface RefreshCommentsBtnProps {
-  onRefresh: () => void;
+  fetchData: () => void;
 }
 
 export const RefreshCommentsBtn: FC<RefreshCommentsBtnProps> = ({
-  onRefresh,
+  fetchData,
 }) => {
   return (
-    <Button onClick={onRefresh} className={styles.button}>
+    <Button onClick={fetchData} className={styles.button}>
       Update comments
     </Button>
   );

@@ -1,10 +1,10 @@
 import { Panel, Spinner, NavIdProps } from "@vkontakte/vkui";
 import { FC, useEffect } from "react";
 import { fetchNewStories } from "../api/newsSlice";
-import { NewsList } from "../../../widgets/news/ui/NewsList";
-import { Header } from "../../../widgets/header/ui/Header";
+
+import { Header, NewsList } from "../../../widgets";
 import { useAppDispatch, useAppSelector } from "../../../app/appStore";
-import { RefreshNewsBtn } from "../../../features/refreshNewsBtn/ui/RefreshNewsBtn";
+import { RefreshNewsBtn } from "../../../features";
 
 export const Home: FC<NavIdProps> = ({ id }) => {
   const dispatch = useAppDispatch();
